@@ -33,7 +33,6 @@ class SiglipTextEncoder(nn.Module):
 
 
 class SiglipTokenizer:
-    """Thin wrapper around HuggingFace tokenizer for convenience."""
     def __init__(
         self,
         model_name: str = "google-bert/bert-base-uncased",
