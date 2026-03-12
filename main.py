@@ -18,9 +18,9 @@ from encoder import SiglipTextEncoder, SiglipTokenizer
 @dataclass
 class TrainConfig:
     train_shards: str = "/path/to/cc12m/{00000..01242}.tar" 
-    num_workers: int = 8
-    batch_size: int = 512
-    max_length: int = 64
+    num_workers: int = 3
+    batch_size: int = 64
+    max_length: int = 256
     embed_dim: int = 768
     freeze_text_encoder: bool = False
     epochs: int = 30
@@ -85,7 +85,7 @@ def build_dataloader(cfg: TrainConfig):
     ])
 
     dataset = (
-        wds.WebDataset(cfg.train_shards, resampled=True)
+        wds.WebDataset(cfg.train_shards, resampled=True, shardshuffle = True)
         .shuffle(1000)
         .decode("pil")
         .to_tuple("jpg", "txt")
@@ -154,7 +154,7 @@ def train(cfg: TrainConfig):
     model = SiglipModel(cfg).to(device)
     criterion = SiglipLoss()
     optimizer = torch.optim.AdamW(model.parameters(),lr=cfg.learning_rate,weight_decay=cfg.weight_decay,betas=(0.9, 0.98),)
-    scaler = GradScaler()
+    scaler = torch.amp.GradScaler('cuda')
     tokenizer = SiglipTokenizer(max_length=cfg.max_length)
     logger = CSVLogger(cfg.log_file)
 
@@ -231,8 +231,8 @@ def train(cfg: TrainConfig):
 if __name__ == "__main__":
     cfg = TrainConfig(
         train_shards = "./cc3m_shards/cc3m-train-{0000..0575}.tar",
-        batch_size=512,
-        epochs=30,
+        batch_size=256,
+        epochs=15,
         learning_rate=1e-4,
         checkpoint_dir="./checkpoints",
         log_file="./logs/metrics.csv",
