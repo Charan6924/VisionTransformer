@@ -150,15 +150,6 @@ webdataset
 huggingface_hub
 ```
 
----
 
-## Reference
 
-```bibtex
-@article{zhai2023sigmoid,
-  title={Sigmoid Loss for Language Image Pre-Training},
-  author={Zhai, Xiaohua and Mustafa, Basil and Kolesnikov, Alexander and Beyer, Lucas},
-  journal={arXiv preprint arXiv:2303.15343},
-  year={2023}
-}
 ```
