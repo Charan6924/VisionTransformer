@@ -1,0 +1,6 @@
+Job ID: 3205121
+Node: gput072
+GPU: 0
+Start time: Thu Mar 12 17:46:07 EDT 2026
+Training on: cuda
+  [ckpt] resumed from step 78000

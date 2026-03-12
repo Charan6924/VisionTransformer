@@ -17,10 +17,10 @@ from encoder import SiglipTextEncoder, SiglipTokenizer
 
 @dataclass
 class TrainConfig:
-    train_shards: str = "/path/to/cc12m/{00000..01242}.tar" 
+    train_shards: str = "./cc3m_shards/cc3m-train-{0000..0575}.tar" 
     num_workers: int = 3
-    batch_size: int = 64
-    max_length: int = 256
+    batch_size: int = 256
+    max_length: int = 64
     embed_dim: int = 768
     freeze_text_encoder: bool = False
     epochs: int = 30
@@ -140,7 +140,7 @@ def save_checkpoint(model, optimizer, scaler, step, epoch, loss, cfg: TrainConfi
 
 
 def load_checkpoint(path, model, optimizer, scaler):
-    ckpt = torch.load(path, map_location="cpu")
+    ckpt = torch.load(path, map_location="cpu", weights_only=True)
     model.load_state_dict(ckpt["model"])
     optimizer.load_state_dict(ckpt["optimizer"])
     scaler.load_state_dict(ckpt["scaler"])
@@ -236,5 +236,6 @@ if __name__ == "__main__":
         learning_rate=1e-4,
         checkpoint_dir="./checkpoints",
         log_file="./logs/metrics.csv",
+        resume_from = '/scratch/pioneer/users/cxv166/VisionTransformer/checkpoints/step_0078000.pt'
     )
     train(cfg)

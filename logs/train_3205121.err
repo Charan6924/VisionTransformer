@@ -1,0 +1,18 @@
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 72134.34it/s]
+[1mBertModel LOAD REPORT[0m from: google-bert/bert-base-uncased
+Key                                        | Status     |  | 
+-------------------------------------------+------------+--+-
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |  | 
+cls.seq_relationship.bias                  | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |  | 
+cls.predictions.bias                       | UNEXPECTED |  | 
+cls.predictions.transform.dense.bias       | UNEXPECTED |  | 
+cls.predictions.transform.dense.weight     | UNEXPECTED |  | 
+cls.seq_relationship.weight                | UNEXPECTED |  | 
+
+[3mNotes:
+- UNEXPECTED[3m	:can be ignored when loading from different task/architecture; not ok if you expect identical arch.[0m
+/scratch/pioneer/users/cxv166/VisionTransformer/.venv/lib/python3.12/site-packages/webdataset/compat.py:377: UserWarning: WebDataset(shardshuffle=...) is ignored for resampled datasets
+  warnings.warn("WebDataset(shardshuffle=...) is ignored for resampled datasets")
+/scratch/pioneer/users/cxv166/VisionTransformer/.venv/lib/python3.12/site-packages/webdataset/compat.py:381: UserWarning: set WebDataset(shardshuffle=...) to a positive integer or 0 or False
+  warnings.warn("set WebDataset(shardshuffle=...) to a positive integer or 0 or False")
